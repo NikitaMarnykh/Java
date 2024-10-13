@@ -11,10 +11,32 @@ public class Container<template> {
         boolean is_empty() {
             return (item == null);
         }
+
+        void add(template item) {
+
+            if (this.is_empty())
+                this.item = item;
+            else {
+                Node<template> current = this;
+
+                while (current.next != null) {
+                    current = current.next;
+                }
+
+                Node<template> new_node = new Node<>();
+                new_node.item = item;
+                new_node.previous = current;
+                current.next = new_node;
+            }
+        }
     }
 
     Container() {
         head = new Node<>();
+    }
+
+    void add(template item) {
+        head.add(item);
     }
 
         boolean is_empty() {

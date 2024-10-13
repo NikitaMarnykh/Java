@@ -1,5 +1,5 @@
 public class Container<template> {
-    private Node<template> node;
+    private Node<template> head;
 
     static class Node<template> {
         template item;
@@ -7,9 +7,17 @@ public class Container<template> {
         Node<template> previous;
 
         Node() {}
+
+        boolean is_empty() {
+            return (item == null);
+        }
     }
 
     Container() {
-        node = new Node<>();
+        head = new Node<>();
+    }
+
+        boolean is_empty() {
+        return head.is_empty();
     }
 }

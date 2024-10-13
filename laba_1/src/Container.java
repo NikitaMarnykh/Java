@@ -14,7 +14,7 @@ public class Container<template> {
 
         void add(template item) {
 
-            if (this.is_empty())
+            if (is_empty())
                 this.item = item;
             else {
                 Node<template> current = this;
@@ -33,6 +33,11 @@ public class Container<template> {
 
     Container() {
         head = new Node<>();
+    }
+
+    Container(template... items) {
+        head = new Node<>();
+        for (template item : items) head.add(item);
     }
 
     void add(template item) {

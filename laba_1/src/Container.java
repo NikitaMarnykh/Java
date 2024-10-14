@@ -30,8 +30,7 @@ public class Container<template> {
 
         if (is_empty()) {
             head = new Node<>(item);
-        }
-        else {
+        } else {
             while (current.next != null) {
                 current = current.next;
             }
@@ -40,6 +39,15 @@ public class Container<template> {
             new_node.previous = current;
             current.next = new_node;
         }
+    }
+
+    Node<template> get(template item) {
+        Node<template> current = head;
+        while (current != null && current.item != item) {
+            current = current.next;
+        }
+
+        return current;
     }
 
     boolean remove(template item) {

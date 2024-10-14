@@ -6,45 +6,72 @@ public class Container<template> {
         Node<template> next;
         Node<template> previous;
 
-        Node() {}
-
-        boolean is_empty() {
-            return (item == null);
+        Node() {
         }
 
-        void add(template item) {
-
-            if (is_empty())
-                this.item = item;
-            else {
-                Node<template> current = this;
-
-                while (current.next != null) {
-                    current = current.next;
-                }
-
-                Node<template> new_node = new Node<>();
-                new_node.item = item;
-                new_node.previous = current;
-                current.next = new_node;
-            }
+        Node(template item) {
+            this.item = item;
         }
     }
 
     Container() {
-        head = new Node<>();
     }
 
     Container(template... items) {
-        head = new Node<>();
-        for (template item : items) head.add(item);
+        for (template item : items) add(item);
+    }
+
+    boolean is_empty() {
+        return (head == null);
     }
 
     void add(template item) {
-        head.add(item);
+        Node<template> current = head;
+
+        if (is_empty()) {
+            head = new Node<>(item);
+        }
+        else {
+            while (current.next != null) {
+                current = current.next;
+            }
+
+            Node<template> new_node = new Node<>(item);
+            new_node.previous = current;
+            current.next = new_node;
+        }
     }
 
-        boolean is_empty() {
-        return head.is_empty();
+    boolean remove(template item) {
+        if (is_empty())
+            return false;
+        else {
+            Node<template> current = head;
+
+            while (current != null && current.item != item) {
+                current = current.next;
+            }
+            if (current == null)
+                return false;
+
+            if (current.previous != null)
+                current.previous.next = current.next;
+            if (current.next != null)
+                current.next.previous = current.previous;
+
+        }
+
+        return true;
+    }
+
+    void print() {
+        Node<template> current = head;
+
+        while (current != null) {
+            System.out.println(current.item);
+            current = current.next;
+        }
     }
 }
+
+

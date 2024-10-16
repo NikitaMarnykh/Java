@@ -1,3 +1,24 @@
+/*
+ * Общий класс Container реализован на основе списка и содержит:
+ * поле Node, содержащее экземпляр общего класса Node.
+ * Методы:
+ * Container() - конструктор класса без аргументов.
+ * Container(template... items) - конструктор класса с переменным числом аргументов.
+ * is_empty()  - проверка на пустоту, тип boolean.
+ * add(template item) - добавление значение в конец Container, тип void.
+ * remove(template item) - удаление значение из Container, тип boolean.
+ * get(template item) - извлечение значения из Container, тип Node<template>.
+ * print() - вывод всех элементов, содержащихся в Container, тип void.
+ * Общий класс Node содержит:
+ * поля:
+ * item- для хранения значения, тип template.
+ * next - для хранения ссылки на следующее значение, тип Node<template>.
+ * previous - для хранения ссылки на предыдущее значение, тип Node<template>.
+ * Конструкторы:
+ * Node() - конструктор без аргументов.
+ * Node(template item) - конструктор с одним аргументов item.
+ * */
+
 package org.example;
 
 

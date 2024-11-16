@@ -82,4 +82,26 @@ public class Execute
     boolean is_letter(char chr) {
         return Character.isLetter(chr);
     }
+
+     void is_valid_char(char chr) {
+        if (!Character.isDigit(chr) && !Character.isLetter(chr) && !is_operator(chr)
+                && chr != '_' && chr != '.' && chr != ' ' && chr != '(' && chr != ')') {
+            throw new RuntimeException("Недопустимый символ: " + chr);
+        }
+    }
+
+    void check_for_valid_decimal_point(int index, char[] chars) throws NumberFormatException {
+        if (chars[index] != '.') {
+            throw new NumberFormatException("Индекс должен указывать на точку.");
+        } else if ((index == 0 || index == chars.length - 1) ||
+                (!Character.isDigit(chars[index - 1]) || !Character.isDigit(chars[index + 1]))) {
+            throw new NumberFormatException("Некорректный формат вещественного числа.");
+        }
+    }
+
+    void is_valid_number_symbol(char chr) {
+        if (!Character.isDigit(chr) && chr != '.') {
+            throw new RuntimeException("Некорректный символ для числа: " + chr);
+        }
+    }
 }

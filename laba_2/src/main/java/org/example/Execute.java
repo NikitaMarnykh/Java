@@ -70,4 +70,16 @@ public class Execute
 
         return postfix;
     }
+
+    boolean is_operator(char chr) {
+        return PRIORITY.containsKey(chr);
+    }
+
+    boolean is_digit(char chr) {
+        return Character.isDigit(chr);
+    }
+
+    boolean is_letter(char chr) {
+        return Character.isLetter(chr);
+    }
 }

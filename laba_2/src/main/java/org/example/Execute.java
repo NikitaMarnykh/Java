@@ -104,4 +104,34 @@ public class Execute
             throw new RuntimeException("Некорректный символ для числа: " + chr);
         }
     }
+
+    int left_border(int start_index, char[] chars) {
+        int ind = start_index;
+        boolean is_digit_first = Character.isDigit(chars[start_index]);
+        boolean is_letter_first = Character.isLetter(chars[start_index]) || (chars[start_index] == '_');
+
+        while (ind < chars.length && !is_operator(chars[ind]) && chars[ind] != ' ') {
+            if (ind + 1 < chars.length) {
+                is_valid_char(chars[ind + 1]);
+            }
+
+            if (chars[ind] == '.') {
+                check_for_valid_decimal_point(ind, chars);
+            }
+
+            if (is_digit_first && (!Character.isDigit(chars[ind]) && chars[ind] != '.')) {
+                throw new RuntimeException("Некорректный символ для числа (или имя переменной не может начинаться с цифры): " + chars[ind]);
+            }
+
+            if (is_letter_first && (!Character.isLetter(chars[ind])
+                    && !Character.isDigit(chars[ind]) && chars[ind] != '_')) {
+                throw new RuntimeException("Некорректный символ для имени переменной: " + chars[ind]);
+            }
+
+            ind++;
+        }
+
+        return ind - start_index - 1;
+    }
+
 }

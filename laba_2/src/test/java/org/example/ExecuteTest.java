@@ -1,38 +1,53 @@
 package org.example;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit test for simple App.
+ * Класс тестирования для проверки корректности работы класса Execute.
+ *
+ * В этом классе используются тесты для подтверждения правильности
+ * преобразования арифметических выражений из инфиксной нотации в
+ * постфиксную, а также для выполнения вычислений на основе постфиксных
+ * выражений.
  */
-public class ExecuteTest
-    extends TestCase
-{
+class ExecuteTest {
+    private Execute execute;
+
     /**
-     * Create the test case
-     *
-     * @param testName name of the test case
+     * Метод, который выполняется перед каждым тестом.
+     * Инициализирует экземпляр класса Execute.
      */
-    public ExecuteTest(String testName )
-    {
-        super( testName );
+    @BeforeEach
+    void setUp() {
+        execute = Execute.get_instance();
     }
 
     /**
-     * @return the suite of tests being tested
+     * Тестирование преобразования инфиксного выражения с числами в постфиксное.
      */
-    public static Test suite()
-    {
-        return new TestSuite( ExecuteTest.class );
+    @Test
+    void infix_to_postfix_numbers() {
+        String infix = "10 + 5 * 3 / 2";
+        String expected = "10 5 3 *2 /+";
+        String result = execute.infix_to_postfix(infix);
+        assertEquals(expected, result);
     }
 
     /**
-     * Rigourous Test :-)
+     * Тестирование преобразования инфиксного выражения с переменными в постфиксное.
      */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    void infix_to_postfix_variables() {
+        String infix = "(A + B) * C - (D / 2)";
+        String expected = "A B +C *D 2 /-";
+        String result = execute.infix_to_postfix(infix);
+        assertEquals(expected, result);
     }
+
 }

@@ -82,4 +82,38 @@ class ExecuteTest {
         assertEquals(expected, result);
     }
 
+        /**
+     * Тестирование выполнения простого постфиксного выражения.
+     */
+    @Test
+    void execution_of_postfix() {
+        String postfix = "5 1 2 + 4 * + 3 -";
+        double expected = 14.0;
+        double result = execute.execute(postfix);
+        assertEquals(expected, result);
+    }
+
+    /**
+     * Тестирование выполнения постфиксного выражения с возведением в степень.
+     */
+    @Test
+    void execution_with_exponentiation() {
+        String postfix = "2 7 ^ 2 / 100 4 / +";
+        double expected = 89;
+        double result = execute.execute(postfix);
+        assertEquals(expected, result);
+    }
+
+    /**
+     * Тестирование выполнения постфиксного выражения с делением.
+     */
+    @Test
+    void execution_with_division() {
+        String postfix = "10 2 /";
+        double expected = 5.0;
+        double result = execute.execute(postfix);
+        assertEquals(expected, result);
+    }
+
+    
 }

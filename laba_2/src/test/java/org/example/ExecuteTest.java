@@ -115,5 +115,43 @@ class ExecuteTest {
         assertEquals(expected, result);
     }
 
+    /**
+     * Тестирование выполнения постфиксного выражения с делением на ноль.
+     * Ожидается выброс исключения.
+     */
+    @Test
+    void execution_with_division_by_zero() {
+        String postfix = "10 0 /";
+        Exception exception = assertThrows(ArithmeticException.class, () -> {
+            execute.execute(postfix);
+        });
+        assertEquals("Деление на ноль", exception.getMessage());
+    }
+
+    /**
+     * Тестирование выполнения некорректного постфиксного выражения.
+     * Ожидается выброс исключения, так как пропущен оператор.
+     */
+    @Test
+    void execution_with_invalid_postfix() {
+        String postfix = "5 3 * 2";
+        Exception exception = assertThrows(Exception.class, () -> {
+            execute.execute(postfix);
+        });
+        assertEquals("В выражении пропущен оператор", exception.getMessage());
+    }
+
+    /**
+     * Тестирование преобразования инфиксного выражения с некорректной десятичной точкой.
+     * Ожидается выброс исключения из-за неправильного формата вещественного числа.
+     */
+    @Test
+    void InvalidDecimalPoint() {
+        String infix = "3. +4";
+        Exception exception = assertThrows(NumberFormatException.class, () -> {
+            execute.infix_to_postfix(infix);
+        });
+        assertEquals("Некорректный формат вещественного числа.", exception.getMessage());
+    }
     
 }

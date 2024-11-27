@@ -29,7 +29,7 @@ public class Main {
         }
         long run_time_2 = System.nanoTime() - start_time;
 
-        printResult("ADD", size, run_time_1, run_time_2);
+        print_result("ADD", size, run_time_1, run_time_2);
 
         start_time = System.nanoTime();
         for (int i = 0; i < size; i++) {
@@ -43,7 +43,7 @@ public class Main {
         }
         run_time_2 = System.nanoTime() - start_time;
 
-        printResult("GET", size, run_time_1, run_time_2);
+        print_result("GET", size, run_time_1, run_time_2);
         
         start_time = System.nanoTime();
         int random_number = random.nextInt(size);
@@ -61,7 +61,7 @@ public class Main {
         }
         run_time_2 = System.nanoTime() - start_time;
 
-        printResult("ADD_MIDDLE", size, run_time_1, run_time_2);
+        print_result("ADD_MIDDLE", size, run_time_1, run_time_2);
 
         start_time = System.nanoTime();
         for (int i = 0; i < size; i++) {
@@ -75,6 +75,10 @@ public class Main {
         }
         run_time_2 = System.nanoTime() - start_time;
 
-        printResult("REMOVE", size, run_time_1, run_time_2);
+        print_result("REMOVE", size, run_time_1, run_time_2);
+    }
+
+    private static void print_result(String method, int size, long time_array_list, long time_linked_list) {
+        System.out.printf("%-12s| %-4d| %15d| %16d%n", method, size, time_array_list, time_linked_list);
     }
 }

@@ -26,7 +26,7 @@ public class ParserPeople {
         }
     }
 
-        /**
+    /**
      * Парсит CSV-файл и возвращает список объектов Person.
      *
      * @param path Путь к CSV-файлу для чтения.
@@ -74,7 +74,7 @@ public class ParserPeople {
                             nextLine[2],                   // Пол
                             new Division(divisionId.get(nextLine[4]), nextLine[4]), // Подразделение
                             Integer.parseInt(nextLine[5]), // Зарплата
-                            dateValue                      // Дата рождения
+                            dateValue                       // Дата рождения
                     ));
                 }
             }
@@ -82,5 +82,17 @@ public class ParserPeople {
 
         // Возвращаем заполненный список объектов Person
         return people;
+    }
+
+    /**
+     * Выводит информацию о каждом человеке в предоставленном списке.
+     *
+     * @param list Список объектов Person для вывода.
+     */
+    static void print(List<Person> list) {
+        for (Person person : list) {
+            // Выводим строковое представление каждого человека
+            System.out.println(person.dataToString());
+        }
     }
 }

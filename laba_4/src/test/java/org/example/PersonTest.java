@@ -14,7 +14,7 @@ public class PersonTest {
     int expectedId = 1;
     String expectedName = "John Doe";
     String expectedGender = "Male";
-    Division expectedDivision = new Division(0, "A")
+    Division expectedDivision = new Division(0, "A");
     int expectedSalary = 50000;
     Date expectedDateOfBirth = new Date();  // Здесь можно использовать статичную дату для детального тестирования
 
@@ -29,4 +29,31 @@ public class PersonTest {
     Assertions.assertEquals(expectedSalary, person.getSalary(), "Зарплата должна быть равна " + expectedSalary);
     Assertions.assertEquals(expectedDateOfBirth, person.getDateOfBirth(), "Дата рождения должна совпадать");
   }
+
+  @Test
+  public void testDataToString() {
+    // Тестируем метод dataToString
+    int id = 2;
+    String name = "Jane Smith";
+    String gender = "Female";
+    Division division = new Division(1, "B");
+    int salary = 60000;
+    Date dateOfBirth = new Date(); // Здесь можно использовать статичную дату для детального тестирования
+
+    // Создаем новый объект Person
+    Person person = new Person(id, name, gender, division, salary, dateOfBirth);
+
+    // Ожидаемое строковое представление, имя и дата можно форматировать статично
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    String formattedDate = dateFormat.format(dateOfBirth);
+    String expectedOutput = "ID: " + id +
+                ", Name: " + name +
+                ", Gender: " + gender +
+                ", Division: [" + division.dataToString() + "]" +
+                ", Salary: " + salary +
+                ", Date of Birth: " + formattedDate;
+    // Проверяем, что метод возвращает правильный результат
+    Assertions.assertEquals(expectedOutput, person.dataToString(),
+              "Строковое представление должно соответствовать ожидаемому формату");
+    }
 }

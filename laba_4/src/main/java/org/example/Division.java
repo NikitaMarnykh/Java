@@ -12,11 +12,17 @@ public class Division {
   }
 
   // Геттер для получения идентификатора
-  int getId()  { return id;                       // Возвращаем идентификатор }
+  int getId()  { 
+    return id;                       // Возвращаем идентификатор
+  }
 
   // Геттер для получения названия
-  String getName() { return name;                     // Возвращаем название }
+  String getName() { 
+    return name;                     // Возвращаем название
+  }
 
   // Метод для получения строкового представления объекта Division
-    String dataToString() { return "ID: " + id + ", Name: " + name; // Формируем строку с информацией о подразделении }
+    String dataToString() { 
+      return "ID: " + id + ", Name: " + name; // Формируем строку с информацией о подразделении
+    }
 }

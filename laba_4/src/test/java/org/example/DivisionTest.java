@@ -21,17 +21,18 @@ public class DivisionTest {
 
   @Test
   public void testDataToString() {
-    // Тестируем метод dataToString
-    int id = 2;
-    String name = "Finance";
+        // Тестируем метод dataToString
+        int id = 2;
+        String name = "Finance";
 
-  // Создаем новый объект Division
-  Division division = new Division(id, name);
+        // Создаем новый объект Division
+        Division division = new Division(id, name);
 
-  // Ожидаемое строковое представление
-  String expectedOutput = "ID: " + id + ", Name: " + name;
+        // Ожидаемое строковое представление
+        String expectedOutput = "ID: " + id + ", Name: " + name;
 
-  // Проверяем, что метод возвращает правильный результат
-  Assertions.assertEquals(expectedOutput, division.dataToString(), 
-                          "Строковое представление должно соответствовать ожидаемому формату");
+        // Проверяем, что метод возвращает правильный результат
+        Assertions.assertEquals(expectedOutput, division.dataToString(),
+                "Строковое представление должно соответствовать ожидаемому формату");
+    }
 }

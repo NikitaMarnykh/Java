@@ -16,5 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ParserPeople {
+    // HashMap для хранения идентификаторов подразделений
+    private static final HashMap<String, Integer> divisionId = new HashMap<>();
 
+    static {
+        // Заполнение HashMap divisionId буквами A-Z, соответствующими им номерами от 0 до 25
+        for (char c = 'A'; c <= 'Z'; c++) {
+            divisionId.put(String.valueOf(c), c - 'A');
+        }
+    }
 }

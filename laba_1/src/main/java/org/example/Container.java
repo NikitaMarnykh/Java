@@ -1,119 +1,113 @@
-/*
- * Общий класс Container реализован на основе списка и содержит:
- * поле Node, содержащее экземпляр общего класса Node.
- * Методы:
- * Container() - конструктор класса без аргументов.
- * Container(template... items) - конструктор класса с переменным числом аргументов.
- * is_empty()  - проверка на пустоту, тип boolean.
- * add(template item) - добавление значение в конец Container, тип void.
- * remove(template item) - удаление значение из Container, тип boolean.
- * get(template item) - извлечение значения из Container, тип Node<template>.
- * print() - вывод всех элементов, содержащихся в Container, тип void.
- * Общий класс Node содержит:
- * поля:
- * item- для хранения значения, тип template.
- * next - для хранения ссылки на следующее значение, тип Node<template>.
- * previous - для хранения ссылки на предыдущее значение, тип Node<template>.
- * Конструкторы:
- * Node() - конструктор без аргументов.
- * Node(template item) - конструктор с одним аргументов item.
- * */
-
 package org.example;
 
-
+// Общий класс Container, реализующий список
 public class Container<template> {
-    private Node<template> head;
+    private Node<template> head; // Указатель на первый элемент списка
 
+    // Вложенный класс Node, представляющий элемент списка
     static class Node<template> {
-        template item;
-        Node<template> next;
-        Node<template> previous;
+        template item; // Хранит значение элемента
+        Node<template> next; // Указатель на следующий элемент
+        Node<template> previous; // Указатель на предыдущий элемент
 
+        // Конструктор без аргументов
         Node() {
         }
 
+        // Конструктор с одним аргументом для инициализации item
         Node(template item) {
             this.item = item;
         }
     }
 
+    // Конструктор Container без параметров
     Container() {
     }
 
+    // Конструктор Container с переменным числом аргументов
     Container(template... items) {
-        for (template item : items) add(item);
+        for (template item : items) add(item); // Добавляем каждый элемент в контейнер
     }
 
+    // Метод для проверки, пуст ли контейнер
     boolean is_empty() {
-        return (head == null);
+        return (head == null); // Возвращает true, если head равно null
     }
 
+    // Метод для добавления элемента в конец контейнера
     void add(template item) {
-        Node<template> current = head;
+        Node<template> current = head; // Начинаем с первого элемента
 
-        if (is_empty()) {
-            head = new Node<>(item);
+        if (is_empty()) { // Если контейнер пуст
+            head = new Node<>(item); // Создаем новый элемент и устанавливаем его как head
         } else {
+            // Перемещение к последнему элементу списка
             while (current.next != null) {
                 current = current.next;
             }
 
+            // Создаем новый элемент и обновляем ссылки
             Node<template> new_node = new Node<>(item);
-            new_node.previous = current;
-            current.next = new_node;
+            new_node.previous = current; // Устанавливаем ссылку на предыдущий элемент
+            current.next = new_node; // Устанавливаем ссылку на новый элемент
         }
     }
 
+    // Метод для извлечения элемента из контейнера по значению
     Node<template> get(template item) {
-        Node<template> current = head;
+        Node<template> current = head; // Начинаем с первого элемента
+        // Перебираем список, пока не найдем нужный элемент
         while (current != null && current.item != item) {
-            current = current.next;
+            current = current.next; // Переходим к следующему элементу
         }
 
-        return current;
+        return current; // Возвращаем найденный элемент или null, если не найден
     }
 
+    // Метод для удаления элемента из контейнера по значению
     boolean remove(template item) {
-        if (is_empty()) {
-            return false;
+        if (is_empty()) { // Проверка на пустоту контейнера
+            return false; // Нельзя удалить элемент из пустого контейнера
         }
+
+        // Если элемент, который нужно удалить, - это head
         else if (item == head.item) {
-            head = head.next;
+            head = head.next; // Обновляем head на следующий элемент
 
-            if (!is_empty())
-            {
-                head.previous = null;
+            if (!is_empty()) { // Если контейнер не пуст после удаления
+                head.previous = null; // Устанавливаем предыдущий элемент для нового head
             }
 
-            return true;
-        }
-        else {
-            Node<template> current = head.next;
+            return true; // Успешное удаление
+        } else {
+            Node<template> current = head.next; // Начинаем поиск со второго элемента
 
+            // Поиск элемента в списке
             while (current != null && current.item != item) {
-                current = current.next;
+                current = current.next; // Переходим к следующему элементу
             }
-            if (current == null) {
-                return false;
+            if (current == null) { // Если элемент не найден
+                return false; // Возвращаем false
             }
 
-            current.previous.next = current.next;
-            if (current.next != null)
-                current.next.previous = current.previous;
-
+            // Удаляем найденный элемент, обновляя ссылки
+            current.previous.next = current.next; // Соединяем предыдущий элемент с следующим
+            if (current.next != null) // Если существует следующий элемент
+                current.next.previous = current.previous; // Устанавливаем ссылку на предыдущий элемент для следующего
 
         }
 
-        return true;
+        return true; // Успешное удаление
     }
 
+    // Метод для вывода всех элементов контейнера
     void print() {
-        Node<template> current = head;
+        Node<template> current = head; // Начинаем с первого элемента
 
+        // Перебираем все элементы и выводим их
         while (current != null) {
-            System.out.println(current.item);
-            current = current.next;
+            System.out.println(current.item); // Выводим значение элемента
+            current = current.next; // Переходим к следующему элементу
         }
     }
 }
